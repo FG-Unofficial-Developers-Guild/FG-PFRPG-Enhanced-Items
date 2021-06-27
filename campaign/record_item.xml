@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="item" merge="join">
+		<sheetdata>
+			<subwindow_record name="main">
+				<script file="campaign/scripts/item_drop.lua" />
+			</subwindow_record>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="item_main" merge="join">
+		<margins control="0,0,0,2" />
+		<script file="campaign/scripts/item_main.lua" />
+		<sheetdata>	
+			<label_column name="charge_label" insertbefore="divider4">
+				<anchored>
+					<top offset="16" />
+				</anchored>
+				<static textres="item_label_charges" />
+			</label_column>
+			<number_columnh name="charge" insertbefore="divider4">
+				<anchored width="60" >
+					<top offset="16" />
+				</anchored>
+				<stateframe>
+					<drophilight name="fieldfocusplus" />
+				</stateframe>
+				<script>
+					function onDrop(x, y, draginfo)
+						if draginfo.isType("number") then
+							setValue(getValue() + draginfo.getNumberData());
+							return true;
+						end
+					end
+				</script>
+			</number_columnh>
+
+			<label_fieldtop name="current_label" insertbefore="divider4">
+				<anchored to="charge" />
+				<static textres="item_label_curent" size="50%" />
+			</label_fieldtop>
+
+			<number_columnh name="maxcharges" insertbefore="divider4">
+				<anchored to="charge" width="60" >
+					<top offset="-20" relation="current" />
+				</anchored>
+				<default>50</default>
+				<gmeditonly />
+				<stateframe>
+					<drophilight name="fieldfocusplus" />
+				</stateframe>
+				<script>
+					function onDrop(x, y, draginfo)
+						if draginfo.isType("number") then
+							setValue(getValue() + draginfo.getNumberData());
+							return true;
+						end
+					end
+				</script>
+			</number_columnh>
+				
+			<label_fieldtop name="maxcharges_label" insertbefore="divider4">
+				<anchored to="maxcharges" />
+				<static textres="item_label_max_charges" size="50%" />
+			</label_fieldtop>
+
+			<label_column name="equipslot_label" insertbefore="divider4">
+				<static textres="item_label_equipslot" />
+			</label_column>
+			<string_columnh name="equipslot" insertbefore="divider4">
+				<gmeditonly />
+			</string_columnh>
+
+			<line_column name="divider6" />
+
+			<label_column name="gmonly_label">
+				<static textres="item_label_gmonly" />
+			</label_column>
+			<ft_columnh name="gmonly">
+				<anchored>
+					<left offset="97" />
+					<right offset="-5" />
+				</anchored>
+				<gmeditonly />
+			</ft_columnh>
+			
+			<line_column name="divider5" />
+
+			<ft_columnh name="description">
+				<gmeditonly />
+			</ft_columnh>
+
+			<label_column name="sourcebook_label">
+				<static textres="item_label_sourcebook" />
+			</label_column>
+			<string_columnh name="sourcebook">
+				<gmeditonly />
+			</string_columnh>
+		</sheetdata>
+	</windowclass>
+</root>

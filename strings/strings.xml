@@ -1,0 +1,10 @@
+
+<root>
+	<string name="item_label_charges">Charges</string>
+	<string name="item_label_curent">Current</string>
+	<string name="item_label_equipslot">Slot</string>
+	<string name="item_label_gmonly">GM Notes</string>
+	<string name="item_label_max_charges">Maximum</string>
+	<string name="item_label_size">Size</string>
+	<string name="item_label_sourcebook">Source</string>
+</root>
