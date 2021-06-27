@@ -17,5 +17,5 @@ This extension modifies the item sheet to add some additional features:
 All of the type specific fields only display with the appropriate item type, the same as would originally happen with "Weapon" or "Armor" in the Type field. Additionally, I have fixed the problem where "Weapon" would show the additional fields, but "Magic Weapon" would not. Visibility of the type-specific fields depends on "Weapon", "Armor", "Wand", "Staff", or "Wondrous Item" exactly, with capitalization. Otherwise text before or after doesn't matter.
 
 # Example Images
-![item sheets](https://user-images.githubusercontent.com/1916835/123555247-872b8b00-d752-11eb-95f0-db22c24091c2.jpg)
-![gm-only notes](https://user-images.githubusercontent.com/1916835/123555249-898de500-d752-11eb-8edc-de8c7e0e15d9.jpg)
+![example item sheets](https://user-images.githubusercontent.com/1916835/123555247-872b8b00-d752-11eb-95f0-db22c24091c2.jpg)
+![source field](https://user-images.githubusercontent.com/1916835/123555249-898de500-d752-11eb-8edc-de8c7e0e15d9.jpg)
