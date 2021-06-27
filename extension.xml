@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <!-- 
-	Please see the license.html file included with this distribution for 
+	Please see the LICENSE.md file included with this distribution for 
 	attribution and copyright information.
 -->
 
 <root version="3.1">
 	<properties>
-		<name>PFRPG - Enhanced Items v4.21</name>
+		<name>Enhanced Items</name>
 		<version>4.21</version>
 		<author>Llisandur</author>
-		<description>Enhanced Item fields for 3.5E and Pathfinder</description>
+		<description>Adds useful fields to various types of items</description>
 		<ruleset>
 			<name>3.5E</name>
 		</ruleset>
@@ -19,10 +19,13 @@
 		</ruleset>
 		<loadorder>50</loadorder>
 	</properties>
-	<announcement text="PFRPG - Enhanced Items v4.21\nFor Fantasy Grounds v3.3+ and the Pathfinder Rulesets\nBy Llisandur, based on the work by Sciencephile and Jwguy with contributions from rmilmine" font="emotefont"/>
+
+	<announcement text="Enhanced Items v4.21\rFor Fantasy Grounds v3.3+\rOriginal extension by sciencephile with updates by Jwguy, Llisandur, and rmilmine\rAdds useful fields to various types of items." font="emotefont" />
+
 	<base>
 		<!-- Strings -->
 		<includefile source="strings/strings.xml" />
+
 		<!-- Campaign Records -->
 		<includefile source="campaign/record_item.xml" />
 	</base>
