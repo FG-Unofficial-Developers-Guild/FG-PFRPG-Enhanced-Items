@@ -32,37 +32,23 @@ function update()
 	local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
 	local bID, bOptionID = ItemManager.getIDState(nodeRecord);
 
-	local sType = type.getValue();
-	local bWeapon
-	local bArmor
-	local bWand
-	local bStaff
-	local bWondrous
+	local sType = string.lower(type.getValue());
+	local bWeapon, bArmor, bWand, bStaff, bWondrous
 
-	if sType:match("Weapon") then
+	if sType:match("weapon") then
 		bWeapon = true;
-	else
-		bWeapon = false;
 	end
-	if sType:match("Armor") then
+	if sType:match("armor") then
 		bArmor = true;
-	else
-		bArmor = false;
 	end
-	if sType:match("Wand") then
+	if sType:match("wand") then
 		bWand = true;
-	else
-		bWand = false;
 	end
-	if sType:match("Staff") then
+	if sType:match("staff") then
 		bStaff = true;
-	else
-		bStaff = false;
 	end
-	if sType:match("Wondrous Item") then
+	if sType:match("wondrous item") then
 		bWondrous = true;
-	else
-		bWondrous = false;
 	end
 
 
@@ -100,17 +86,18 @@ function update()
 	if updateControl("speed30", bReadOnly, bID and bArmor) then bSection4 = true; end
 	if updateControl("speed20", bReadOnly, bID and bArmor) then bSection4 = true; end
 
-	current_label.setVisible(false);
-	maxcharges.setVisible(false);
-	maxcharges_label.setVisible(false);
 	if updateControl("charge", bReadOnly, bID and (bWand or bStaff)) then
+		bSection4 = true;
+		maxcharges.setReadOnly(bReadOnly);
+		charge.setReadOnly(false);
 		current_label.setVisible(true);
 		maxcharges.setVisible(true);
-		maxcharges.setReadOnly(bReadOnly);
 		maxcharges_label.setVisible(true);
-		bSection4 = true;
+	else
+		current_label.setVisible(false);
+		maxcharges.setVisible(false);
+		maxcharges_label.setVisible(false);
 	end
-	charge.setReadOnly(false);
 
 	if updateControl("equipslot", bReadOnly, bID and bWondrous) then bSection4 = true; end
 
