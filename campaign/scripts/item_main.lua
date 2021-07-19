@@ -27,30 +27,39 @@ function updateControl(sControl, bReadOnly, bID)
 	return self[sControl].update(bReadOnly);
 end
 
+function getItemType()
+	local bWeapon, bArmor, bShield, bWand, bStaff, bWondrous;
+	local sType = string.lower(type.getValue());
+	local sSubtype = string.lower(subtype.getValue());
+
+	if sType:match('weapon') then
+		bWeapon = true;
+	end
+	if sType:match('armor') then
+		bArmor = true;
+	end
+	if sType:match('wand') then
+		bWand = true;
+	end
+	if sType:match('staff') then
+		bStaff = true;
+	end
+	if sType:match('wondrous item') then
+		bWondrous = true;
+	end
+	if sType:match('shield') or sSubtype:match('shield') then
+		bShield = true;
+	end
+
+	return bWeapon, bArmor, bShield, bWand, bStaff, bWondrous;
+end
+
 function update()
 	local nodeRecord = getDatabaseNode();
 	local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
 	local bID, bOptionID = ItemManager.getIDState(nodeRecord);
 
-	local sType = string.lower(type.getValue() or "");
-	local bWeapon, bArmor, bWand, bStaff, bWondrous
-
-	if sType:match("weapon") then
-		bWeapon = true;
-	end
-	if sType:match("armor") then
-		bArmor = true;
-	end
-	if sType:match("wand") then
-		bWand = true;
-	end
-	if sType:match("staff") then
-		bStaff = true;
-	end
-	if sType:match("wondrous item") then
-		bWondrous = true;
-	end
-
+	local bWeapon, bArmor, bShield, bWand, bStaff, bWondrous = getItemType();
 
 	local bSection1 = false;
 	if bOptionID and Session.IsHost then
