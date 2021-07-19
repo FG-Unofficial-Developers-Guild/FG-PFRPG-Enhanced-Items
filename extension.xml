@@ -8,7 +8,7 @@
 <root version="3.1">
 	<properties>
 		<name>Feature: Enhanced Items</name>
-		<version>4.21</version>
+		<version>4.4</version>
 		<author>Llisandur</author>
 		<description>Adds useful fields to various types of items</description>
 		<ruleset>
@@ -20,7 +20,7 @@
 		<loadorder>50</loadorder>
 	</properties>
 
-	<announcement text="Enhanced Items v4.21\rFor Fantasy Grounds v3.3+\rOriginal extension by sciencephile with updates by Jwguy, Llisandur, and rmilmine\rAdds useful fields to various types of items." font="emotefont" />
+	<announcement text="Enhanced Items v4.4\rFor Fantasy Grounds v3.3+\rOriginal extension by sciencephile with updates by Jwguy, Llisandur, and rmilmine\rAdds useful fields to various types of items." font="emotefont" />
 
 	<base>
 		<!-- Strings -->
