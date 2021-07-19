@@ -32,7 +32,7 @@ function update()
 	local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
 	local bID, bOptionID = ItemManager.getIDState(nodeRecord);
 
-	local sType = string.lower(type.getValue());
+	local sType = string.lower(type.getValue() or "");
 	local bWeapon, bArmor, bWand, bStaff, bWondrous
 
 	if sType:match("weapon") then
