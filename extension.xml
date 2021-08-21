@@ -20,7 +20,7 @@
 		<loadorder>50</loadorder>
 	</properties>
 
-	<announcement text="https://www.fantasygrounds.com/forums/showthread.php?40602-Extension-Enhanced-Items-v4\rEnhanced Items v4.4\rFor Fantasy Grounds v3.3+\rOriginal extension by sciencephile with updates by Jwguy, Llisandur, rmilmine, and bmos\rAdds useful fields to various types of items." font="emotefont" />
+	<announcement text="https://www.fantasygrounds.com/forums/showthread.php?40602-Extension-Enhanced-Items-v4\rEnhanced Items v4.4-hotfix.1\rFor Fantasy Grounds v3.3+\rOriginal extension by sciencephile with updates by Jwguy, Llisandur, rmilmine, and bmos\rAdds useful fields to various types of items." font="emotefont" />
 
 	<base>
 		<!-- Strings -->
