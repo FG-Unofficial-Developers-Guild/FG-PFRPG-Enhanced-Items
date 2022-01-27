@@ -128,10 +128,8 @@ function update()
 	gmonly_label.setVisible(false);
 	gmonly.setVisible(false);
 	
-	if bOptionID and Session.IsHost then
-		if updateControl("gmonly", bReadOnly, true) then bSection7 = true; end
-	elseif Session.IsHost then
-		updateControl("gmonly", bReadOnly, false);
+	if Session.IsHost then
+		if updateControl("gmonly", bReadOnly, bOptionID) then bSection7 = true; end
 	end
 	if Session.IsHost then 
 		divider6.setVisible((bSection1 or bSection2 or bSection3 or bSection4 or bSection5) and bSection7);
