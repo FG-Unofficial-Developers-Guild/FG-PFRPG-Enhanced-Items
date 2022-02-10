@@ -3,7 +3,7 @@ This extension modifies the item sheet to add some additional features like char
 Original extension by [sciencephile](https://www.fantasygrounds.com/forums/member.php?23086-sciencephile) with updates by [Jwguy](https://www.fantasygrounds.com/forums/member.php?26033-Jwguy), [Llisandur](https://www.fantasygrounds.com/forums/member.php?61628-Llisandur), and [rmilmine](https://www.fantasygrounds.com/forums/member.php?215591-rmilmine).
 
 # Compatibility
-This extension has been tested with [FantasyGrounds Unity](https://www.fantasygrounds.com/home/FantasyGroundsUnity.php) 4.1.4 (2021-06-08).
+This extension has been tested with [FantasyGrounds Unity](https://www.fantasygrounds.com/home/FantasyGroundsUnity.php) 4.1.13 (2022-01-05).
 
 # Features
 This extension modifies the item sheet to add some additional features:
