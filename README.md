@@ -1,4 +1,6 @@
-# PFRPG Enhanced Items
+[![Build FG-Usable File](https://github.com/FG-Unofficial-Developers-Guild/FG-PFRPG-Enhanced-Items/actions/workflows/create-ext.yml/badge.svg)](https://github.com/FG-Unofficial-Developers-Guild/FG-PFRPG-Enhanced-Items/actions/workflows/create-ext.yml) [![Luacheck](https://github.com/FG-Unofficial-Developers-Guild/FG-PFRPG-Enhanced-Items/actions/workflows/luacheck.yml/badge.svg)](https://github.com/FG-Unofficial-Developers-Guild/FG-PFRPG-Enhanced-Items/actions/workflows/luacheck.yml)
+
+# Enhanced Items
 This extension modifies the item sheet to add some additional features like charges for wands and a gm-only notes field.
 Original extension by [sciencephile](https://www.fantasygrounds.com/forums/member.php?23086-sciencephile) with updates by [Jwguy](https://www.fantasygrounds.com/forums/member.php?26033-Jwguy), [Llisandur](https://www.fantasygrounds.com/forums/member.php?61628-Llisandur), and [rmilmine](https://www.fantasygrounds.com/forums/member.php?215591-rmilmine).
 
