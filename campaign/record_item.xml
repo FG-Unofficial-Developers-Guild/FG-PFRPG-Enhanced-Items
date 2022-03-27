@@ -32,6 +32,8 @@
 						window.update();
 					end
 				</script>
+				<gmeditonly />
+				<gmvisibleonly />
 			</buttonfield>
 			
 			<label_column name="charge_label" insertbefore="divider4">
