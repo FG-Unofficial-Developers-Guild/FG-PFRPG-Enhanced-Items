@@ -34,6 +34,7 @@ function update()
 	local nodeRecord = getDatabaseNode();
 	local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
 	local bID, bOptionID = ItemManager.getIDState(nodeRecord);
+	local nCostVisibility = cost_visibility.getValue();
 
 	local bWeapon, bArmor, bShield, bWand, bStaff, bWondrous = getItemType();
 
@@ -54,7 +55,11 @@ function update()
 	if updateControl('subtype', bReadOnly, bID) then bSection2 = true; end
 
 	local bSection3 = false;
-	if updateControl('cost', bReadOnly, bID) then bSection3 = true; end
+	if Session.IsHost then
+		if updateControl("cost", bReadOnly, bID) then bSection3 = true; end
+	else
+		if updateControl("cost", bReadOnly, bID and (nCostVisibility == 0)) then bSection3 = true; end
+	end
 	if updateControl('weight', bReadOnly, bID) then bSection3 = true; end
 	if updateControl('size', bReadOnly, bID) then bSection3 = true; end
 
