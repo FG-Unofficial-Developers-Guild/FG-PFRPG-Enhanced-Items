@@ -17,7 +17,23 @@
 	<windowclass name="item_main" merge="join">
 		<margins control="0,0,0,2" />
 		<script file="campaign/scripts/item_main.lua" />
-		<sheetdata>	
+		<sheetdata>
+			<string_columnh name="cost">
+				<anchored>
+					<right offset="-30" />
+				</anchored>
+			</string_columnh>
+			<buttonfield name="cost_visibility" insertbefore="weight_label">
+				<anchored to="cost" position="right" offset="10,0" width="20" />
+				<state icon="visibilityon" />>
+				<state icon="visibilityoff" />
+				<script>
+					function onValueChanged()
+						window.update();
+					end
+				</script>
+			</buttonfield>
+			
 			<label_column name="charge_label" insertbefore="divider4">
 				<anchored>
 					<top offset="16" />
