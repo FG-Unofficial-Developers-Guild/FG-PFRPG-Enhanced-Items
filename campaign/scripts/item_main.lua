@@ -56,9 +56,9 @@ function update()
 
 	local bSection3 = false;
 	if Session.IsHost then
-		if updateControl("cost", bReadOnly, bID) then bSection3 = true; end
+		if updateControl('cost', bReadOnly, bID) then bSection3 = true; end
 	else
-		if updateControl("cost", bReadOnly, bID and (nCostVisibility == 0)) then bSection3 = true; end
+		if updateControl('cost', bReadOnly, bID and (nCostVisibility == 0)) then bSection3 = true; end
 	end
 	if updateControl('weight', bReadOnly, bID) then bSection3 = true; end
 	if updateControl('size', bReadOnly, bID) then bSection3 = true; end
