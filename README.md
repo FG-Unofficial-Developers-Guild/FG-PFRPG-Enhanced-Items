@@ -2,10 +2,10 @@
 
 # Enhanced Items
 This extension modifies the item sheet to add some additional features like charges for wands and a gm-only notes field.
-Original extension by [sciencephile](https://www.fantasygrounds.com/forums/member.php?23086-sciencephile) with updates by [Jwguy](https://www.fantasygrounds.com/forums/member.php?26033-Jwguy), [Llisandur](https://www.fantasygrounds.com/forums/member.php?61628-Llisandur), and [rmilmine](https://www.fantasygrounds.com/forums/member.php?215591-rmilmine).
+Original extension by [sciencephile](https://www.fantasygrounds.com/forums/member.php?23086-sciencephile) with updates by [jwguy](https://www.fantasygrounds.com/forums/member.php?26033-Jwguy), [llisandur](https://www.fantasygrounds.com/forums/member.php?61628-Llisandur), [rmilmine](https://www.fantasygrounds.com/forums/member.php?215591-rmilmine), and bmos.
 
 # Compatibility
-This extension has been tested with [FantasyGrounds Unity](https://www.fantasygrounds.com/home/FantasyGroundsUnity.php) 4.1.13 (2022-01-05).
+This extension has been tested with [FantasyGrounds Unity](https://www.fantasygrounds.com/home/FantasyGroundsUnity.php) 4.2.2 (2022-06-07).
 
 # Features
 This extension modifies the item sheet to add some additional features:
