@@ -1,19 +1,8 @@
--- 
+--
 -- Please see the LICENSE.md file included with this distribution for attribution and copyright information.
 --
-function onInit() update(); end
 
-function VisDataCleared() update(); end
-
-function InvisDataAdded() update(); end
-
-function updateControl(sControl, bReadOnly, bID)
-	if not self[sControl] then return false; end
-
-	if not bID then return self[sControl].update(bReadOnly, true); end
-
-	return self[sControl].update(bReadOnly);
-end
+-- luacheck: globals update getItemType
 
 function getItemType()
 	local bWeapon, bArmor, bShield, bWand, bStaff, bWondrous;
@@ -30,54 +19,61 @@ function getItemType()
 	return bWeapon, bArmor, bShield, bWand, bStaff, bWondrous;
 end
 
-function update()
+function update(...)
+	if super and super.update then super.update(...); end
+
 	local nodeRecord = getDatabaseNode();
 	local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
-	local bID, bOptionID = ItemManager.getIDState(nodeRecord);
-	local nCostVisibility = cost_visibility.getValue();
+	local bID = LibraryData.getIDState("item", nodeRecord);
 
 	local bWeapon, bArmor, bShield, bWand, bStaff, bWondrous = getItemType();
 
 	local bSection1 = false;
-	if bOptionID and Session.IsHost then
-		if updateControl('nonid_name', bReadOnly, true) then bSection1 = true; end
+	if Session.IsHost then
+		if self.updateControl("nonid_name", bReadOnly, true) then bSection1 = true; end;
 	else
-		updateControl('nonid_name', false);
+		self.updateControl("nonid_name", false);
 	end
-	if bOptionID and (Session.IsHost or not bID) then
-		if updateControl('nonidentified', bReadOnly, true) then bSection1 = true; end
+	if (Session.IsHost or not bID) then
+		if self.updateControl("nonidentified", bReadOnly, true) then bSection1 = true; end;
 	else
-		updateControl('nonidentified', false);
+		self.updateControl("nonidentified", false);
 	end
 
 	local bSection2 = false;
-	if updateControl('type', bReadOnly, bID) then bSection2 = true; end
-	if updateControl('subtype', bReadOnly, bID) then bSection2 = true; end
+	if self.updateControl("type", bReadOnly, bID) then bSection2 = true; end
+	if self.updateControl("subtype", bReadOnly, bID) then bSection2 = true; end
 
 	local bSection3 = false;
 	if Session.IsHost then
-		if updateControl('cost', bReadOnly, bID) then bSection3 = true; end
+		if self.updateControl("cost", bReadOnly, bID) then bSection3 = true; end
 	else
-		if updateControl('cost', bReadOnly, bID and (nCostVisibility == 0)) then bSection3 = true; end
+		if self.updateControl('cost', bReadOnly, bID and (cost_visibility.getValue() == 0)) then bSection3 = true; end
 	end
-	if updateControl('weight', bReadOnly, bID) then bSection3 = true; end
-	if updateControl('size', bReadOnly, bID) then bSection3 = true; end
+	if self.updateControl("weight", bReadOnly, bID) then bSection3 = true; end
+	if self.updateControl('size', bReadOnly, bID) then bSection3 = true; end
 
-	local bSection4 = false;
-	if updateControl('damage', bReadOnly, bID and bWeapon) then bSection4 = true; end
-	if updateControl('damagetype', bReadOnly, bID and bWeapon) then bSection4 = true; end
-	if updateControl('critical', bReadOnly, bID and bWeapon) then bSection4 = true; end
-	if updateControl('range', bReadOnly, bID and bWeapon) then bSection4 = true; end
+	local bSection4 = true;
+	if Session.IsHost or bID then
+		if bShield then
+			type_stats.setValue("item_main_armor", nodeRecord);
+			type_stats2.setValue("item_main_weapon", nodeRecord);
+		elseif bWeapon then
+			type_stats.setValue("item_main_weapon", nodeRecord);
+		elseif bArmor then
+			type_stats.setValue("item_main_armor", nodeRecord);
+		else
+			type_stats.setValue("", "");
+			bSection4 = false;
+		end
+	else
+		type_stats.setValue("", "");
+		bSection4 = false;
+	end
+	type_stats.update(bReadOnly, bID);
+	type_stats2.update(bReadOnly, bID);
 
-	if updateControl('ac', bReadOnly, bID and bArmor) then bSection4 = true; end
-	if updateControl('maxstatbonus', bReadOnly, bID and bArmor) then bSection4 = true; end
-	if updateControl('checkpenalty', bReadOnly, bID and bArmor) then bSection4 = true; end
-	if updateControl('spellfailure', bReadOnly, bID and bArmor) then bSection4 = true; end
-	if updateControl('speed30', bReadOnly, bID and bArmor) then bSection4 = true; end
-	if updateControl('speed20', bReadOnly, bID and bArmor) then bSection4 = true; end
-
-	if updateControl('charge', bReadOnly, bID and (bWand or bStaff)) then
-		bSection4 = true;
+	if self.updateControl('charge', bReadOnly, bID and (bWand or bStaff)) then
 		maxcharges.setReadOnly(bReadOnly);
 		charge.setReadOnly(false);
 		current_label.setVisible(true);
@@ -89,28 +85,21 @@ function update()
 		maxcharges_label.setVisible(false);
 	end
 
-	if updateControl('equipslot', bReadOnly, bID and bWondrous) then bSection4 = true; end
-
-	if updateControl('properties', bReadOnly, bID and (bWeapon or bArmor)) then bSection4 = true; end
+	if self.updateControl('equipslot', bReadOnly, bID and bWondrous) then bSection4 = true; end
 
 	local bSection5 = false;
-	if updateControl('bonus', bReadOnly, bID and (bWeapon or bArmor)) then bSection5 = true; end
-	if updateControl('aura', bReadOnly, bID) then bSection5 = true; end
-	if updateControl('cl', bReadOnly, bID) then bSection5 = true; end
-	if updateControl('prerequisites', bReadOnly, bID) then bSection5 = true; end
+	if self.updateControl("aura", bReadOnly, bID) then bSection5 = true; end
+	if self.updateControl("cl", bReadOnly, bID) then bSection5 = true; end
+	if self.updateControl("prerequisites", bReadOnly, bID) then bSection5 = true; end
 
 	local bSection6 = bID;
 	description.setVisible(bID);
 	description.setReadOnly(bReadOnly);
-	updateControl('sourcebook', bReadOnly, bID);
-
-	local bSection7 = false;
-	divider6.setVisible(false);
-	gmonly_label.setVisible(false);
-	gmonly.setVisible(false);
-
-	if Session.IsHost then if updateControl('gmonly', bReadOnly, bOptionID) then bSection7 = true; end end
-	if Session.IsHost then divider6.setVisible((bSection1 or bSection2 or bSection3 or bSection4 or bSection5) and bSection7); end
+	self.updateControl('sourcebook', bReadOnly, bID);
+	if self.updateControl('gmonly', bReadOnly, bID) then
+		gmonly.setVisible(Session.IsHost);
+		gmonly_label.setVisible(Session.IsHost);
+	end
 
 	divider.setVisible(bSection1 and bSection2);
 	divider2.setVisible((bSection1 or bSection2) and bSection3);

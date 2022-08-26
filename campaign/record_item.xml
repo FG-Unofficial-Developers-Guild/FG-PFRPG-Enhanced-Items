@@ -6,18 +6,14 @@
 -->
 
 <root>
-	<windowclass name="item" merge="join">
-		<sheetdata>
-			<subwindow_record name="main">
-				<script file="campaign/scripts/item_drop.lua" />
-			</subwindow_record>
-		</sheetdata>
-	</windowclass>
-
 	<windowclass name="item_main" merge="join">
-		<margins control="0,0,0,2" />
 		<script file="campaign/scripts/item_main.lua" />
 		<sheetdata>
+			<label_column name="equipslot_label" insertbefore="divider2">
+				<static textres="item_label_equipslot" />
+			</label_column>
+			<string_columnh name="equipslot" insertbefore="divider2" />
+
 			<string_columnh name="cost">
 				<anchored>
 					<right offset="-30" />
@@ -32,9 +28,10 @@
 						window.update();
 					end
 				</script>
-				<gmeditonly />
 				<gmvisibleonly />
 			</buttonfield>
+
+			<sub_column name="type_stats2" insertbefore="divider4" />
 			
 			<label_column name="charge_label" insertbefore="divider4">
 				<anchored>
@@ -42,8 +39,9 @@
 				</anchored>
 				<static textres="item_label_charges" />
 			</label_column>
+
 			<number_columnh name="charge" insertbefore="divider4">
-				<anchored width="60" >
+				<anchored>
 					<top offset="16" />
 				</anchored>
 				<stateframe>
@@ -58,15 +56,15 @@
 					end
 				</script>
 			</number_columnh>
-
-			<label_fieldtop name="current_label" insertbefore="divider4">
+			<label_fieldtop name="current_label" insertafter="divider4">
 				<anchored to="charge" />
 				<static textres="item_label_curent" size="50%" />
 			</label_fieldtop>
 
-			<number_columnh name="maxcharges" insertbefore="divider4">
-				<anchored to="charge" width="60" >
-					<top offset="-20" relation="current" />
+			<number_column name="maxcharges">
+				<anchored>
+					<top parent="charge" anchor="top" offset="0" />
+					<left parent="charge" anchor="right" offset="10" />
 				</anchored>
 				<default>50</default>
 				<gmeditonly />
@@ -81,21 +79,11 @@
 						end
 					end
 				</script>
-			</number_columnh>
-				
-			<label_fieldtop name="maxcharges_label" insertbefore="divider4">
+			</number_column>
+			<label_fieldtop name="maxcharges_label" insertafter="divider4">
 				<anchored to="maxcharges" />
 				<static textres="item_label_max_charges" size="50%" />
 			</label_fieldtop>
-
-			<label_column name="equipslot_label" insertbefore="divider4">
-				<static textres="item_label_equipslot" />
-			</label_column>
-			<string_columnh name="equipslot" insertbefore="divider4">
-				<gmeditonly />
-			</string_columnh>
-
-			<line_column name="divider6" />
 
 			<label_column name="gmonly_label">
 				<static textres="item_label_gmonly" />
@@ -107,19 +95,11 @@
 				</anchored>
 				<gmeditonly />
 			</ft_columnh>
-			
-			<line_column name="divider5" />
-
-			<ft_columnh name="description">
-				<gmeditonly />
-			</ft_columnh>
 
 			<label_column name="sourcebook_label">
 				<static textres="item_label_sourcebook" />
 			</label_column>
-			<string_columnh name="sourcebook">
-				<gmeditonly />
-			</string_columnh>
+			<string_columnh name="sourcebook" />
 		</sheetdata>
 	</windowclass>
 </root>
