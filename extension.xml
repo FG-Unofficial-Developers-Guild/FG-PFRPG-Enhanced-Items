@@ -7,7 +7,7 @@
 
 <root version="3.1">
 	<properties>
-		<name>Feature: Enhanced Items 1</name>
+		<name>Feature: Enhanced Items</name>
 		<version>4.6</version>
 		<author>Llisandur</author>
 		<description>Adds useful fields to various types of items</description>
