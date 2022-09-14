@@ -35,6 +35,7 @@ local function sectionVis(tSections)
 	end
 end
 
+-- luacheck: globals update
 function update(...)
 	if super and super.update then super.update(...); end
 
