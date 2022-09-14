@@ -2,9 +2,7 @@
 -- Please see the LICENSE.md file included with this distribution for attribution and copyright information.
 --
 
--- luacheck: globals update getItemTypes
-
-function getItemTypes()
+local function getItemTypes()
 	local tTypes = {
 		['weapon'] = false,
 		['armor'] = false,
