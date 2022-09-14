@@ -91,6 +91,7 @@ function update(...)
 	if self.updateControl("aura", bReadOnly, bID) then bSection5 = true; end
 	if self.updateControl("cl", bReadOnly, bID) then bSection5 = true; end
 	if self.updateControl("prerequisites", bReadOnly, bID) then bSection5 = true; end
+	if self.updateControl("activation", bReadOnly, bID and (bWeapon or bArmor or bShield or bStaff or bWondrous)) then bSection5 = true; end
 
 	local bSection6 = bID;
 	description.setVisible(bID);
