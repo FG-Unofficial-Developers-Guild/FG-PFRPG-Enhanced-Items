@@ -8,8 +8,8 @@
 <root version="3.1">
 	<properties>
 		<name>Feature: Enhanced Items</name>
-		<version>4.6</version>
-		<author>Llisandur</author>
+		<version>4.7</version>
+		<author>llisandur</author>
 		<description>Adds useful fields to various types of items</description>
 		<ruleset>
 			<name>3.5E</name>
@@ -20,7 +20,7 @@
 		<loadorder>50</loadorder>
 	</properties>
 
-	<announcement text="https://www.fantasygrounds.com/forums/showthread.php?40602-Extension-Enhanced-Items-v4\rEnhanced Items v4.6\rOriginal extension by sciencephile with updates by jwguy, llisandur, rmilmine, and bmos\rAdds useful fields to various types of items." font="emotefont" />
+	<announcement text="https://www.fantasygrounds.com/forums/showthread.php?40602-Extension-Enhanced-Items-v4\rEnhanced Items v4.7\rOriginal extension by sciencephile with updates by jwguy, llisandur, rmilmine, zarestia, and bmos\rAdds useful fields to various types of items." font="emotefont" />
 
 	<base>
 		<!-- Strings -->
