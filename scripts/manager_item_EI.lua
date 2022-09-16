@@ -23,6 +23,7 @@ end
 
 local isArmor_old;
 local function isArmor(nodeItem, ...)
+	contains_old = StringManager.contains;
 	StringManager.contains = contains;
 	local bReturn = isArmor_old(nodeItem, ...);
 	StringManager.contains = contains_old;
@@ -32,6 +33,7 @@ end
 
 local isShield_old;
 local function isShield(nodeItem, ...)
+	contains_old = StringManager.contains;
 	StringManager.contains = contains;
 	local bReturn = isShield_old(nodeItem, ...);
 	StringManager.contains = contains_old;
@@ -41,6 +43,7 @@ end
 
 local isWeapon_old;
 local function isWeapon(nodeItem, ...)
+	contains_old = StringManager.contains;
 	StringManager.contains = contains;
 	local bReturn = isWeapon_old(nodeItem, ...);
 	StringManager.contains = contains_old;
@@ -49,8 +52,6 @@ local function isWeapon(nodeItem, ...)
 end
 
 function onInit()
-	contains_old = StringManager.contains
-
 	isArmor_old = ItemManager.isArmor
 	ItemManager.isArmor = isArmor;
 	isShield_old = ItemManager.isShield
