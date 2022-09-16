@@ -16,7 +16,7 @@ This extension modifies the item sheet to add some additional features:
 * Source field for tracking which book the information is from
 * Weapon/Shield/Armor detection functions are now 'fuzzy' so "Armor" / "Armors" / "Armor and Defense" / etc will all detect as armor.
 
-All of the type specific fields only display with the appropriate item type, the same as would originally happen with "Weapon" or "Armor" in the Type field. Additionally, I have fixed the problem where "Weapon" would show the additional fields, but "Magic Weapon" would not. Visibility of the type-specific fields depends on "Weapon", "Armor", "Wand", "Staff", or "Wondrous Item" exactly, with capitalization. Otherwise text before or after doesn't matter.
+All of the type specific fields only display with the appropriate item type, the same as would originally happen with "Weapon" or "Armor" in the Type field.
 
 # Example Images
 ![example item sheets](https://user-images.githubusercontent.com/1916835/123555247-872b8b00-d752-11eb-95f0-db22c24091c2.jpg)
