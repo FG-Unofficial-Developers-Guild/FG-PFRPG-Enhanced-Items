@@ -14,7 +14,7 @@ This extension modifies the item sheet to add some additional features:
 * Wand / staff charges field
 * Slot field for wondrous items
 * Source field for tracking which book the information is from
-* Type field visibility fixed
+* Weapon/Shield/Armor detection functions are now 'fuzzy' so "Armor" / "Armors" / "Armor and Defense" / etc will all detect as armor.
 
 All of the type specific fields only display with the appropriate item type, the same as would originally happen with "Weapon" or "Armor" in the Type field. Additionally, I have fixed the problem where "Weapon" would show the additional fields, but "Magic Weapon" would not. Visibility of the type-specific fields depends on "Weapon", "Armor", "Wand", "Staff", or "Wondrous Item" exactly, with capitalization. Otherwise text before or after doesn't matter.
 
