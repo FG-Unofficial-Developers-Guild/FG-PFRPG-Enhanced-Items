@@ -75,10 +75,13 @@ function update(...)
 			type_stats2.setValue("item_main_weapon", nodeRecord);
 		elseif tTypes['weapon'] then
 			type_stats.setValue("item_main_weapon", nodeRecord);
+			type_stats2.setValue("", "");
 		elseif tTypes['armor'] then
 			type_stats.setValue("item_main_armor", nodeRecord);
+			type_stats2.setValue("", "");
 		else
 			type_stats.setValue("", "");
+			type_stats2.setValue("", "");
 			tSections[4] = false;
 		end
 	else
