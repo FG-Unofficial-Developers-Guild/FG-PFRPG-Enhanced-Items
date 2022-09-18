@@ -103,13 +103,13 @@ function update(...)
 		maxcharges_label.setVisible(false);
 	end
 
-	if self.updateControl('equipslot', bReadOnly, bID and tTypes['wondrous']) then tSections[4] = true; end
+	if self.updateControl('equipslot', bReadOnly, bID and tTypes['wondrous%sitem']) then tSections[4] = true; end
 
 	if self.updateControl("aura", bReadOnly, bID) then tSections[5] = true; end
 	if self.updateControl("cl", bReadOnly, bID) then tSections[5] = true; end
 	if self.updateControl("prerequisites", bReadOnly, bID) then tSections[5] = true; end
 	if self.updateControl("activation", bReadOnly, bID and (
-							tTypes['shield'] or tTypes['armor'] or tTypes['staff'] or tTypes['wondrous']
+							tTypes['shield'] or tTypes['armor'] or tTypes['staff'] or tTypes['wondrous%sitem']
 						)) then tSections[5] = true; end
 
 	tSections[6] = bID;

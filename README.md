@@ -10,13 +10,14 @@ This extension has been tested with [FantasyGrounds Unity](https://www.fantasygr
 # Features
 This extension modifies the item sheet to add some additional features:
 
-* Add GM-only field for tracking notes not visible to players.
-* Wand / staff charges field
-* Slot field for wondrous items
-* Source field for tracking which book the information is from
-* Type field visibility fixed
+* Add GM-only field added to all items for tracking notes not visible to players.
+* Charges fields added for Wands and Staffs.
+* Slot field added for Wondrous Items.
+* Source field added to all items for tracking an item's sourcebook.
+* Activation field for tracking what action is needed for use. Visible for Weapons, Armor, Shields, Staffs, and Wondrous Items.
+* Weapon/Shield/Armor detection functions are now 'fuzzy' so "Armor" / "Armors" / "Armor and Defense" / etc will all detect as armor.
 
-All of the type specific fields only display with the appropriate item type, the same as would originally happen with "Weapon" or "Armor" in the Type field. Additionally, I have fixed the problem where "Weapon" would show the additional fields, but "Magic Weapon" would not. Visibility of the type-specific fields depends on "Weapon", "Armor", "Wand", "Staff", or "Wondrous Item" exactly, with capitalization. Otherwise text before or after doesn't matter.
+All of the type specific fields only display with the appropriate item type, the same as would originally happen with "Weapon" or "Armor" in the Type field.
 
 # Example Images
 ![example item sheets](https://user-images.githubusercontent.com/1916835/123555247-872b8b00-d752-11eb-95f0-db22c24091c2.jpg)
