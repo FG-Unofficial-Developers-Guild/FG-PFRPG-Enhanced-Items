@@ -41,7 +41,7 @@
 			</label_column>
 
 			<number_columnh name="charge" insertbefore="divider4">
-				<anchored>
+				<anchored width="45">
 					<top offset="16" />
 				</anchored>
 				<stateframe>
@@ -62,7 +62,7 @@
 			</label_fieldtop>
 
 			<number_column name="maxcharges">
-				<anchored>
+				<anchored width="45">
 					<top parent="charge" anchor="top" offset="0" />
 					<left parent="charge" anchor="right" offset="10" />
 				</anchored>

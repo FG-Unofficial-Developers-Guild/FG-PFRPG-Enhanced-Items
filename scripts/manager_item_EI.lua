@@ -54,8 +54,10 @@ end
 function onInit()
 	isArmor_old = ItemManager.isArmor
 	ItemManager.isArmor = isArmor;
+
 	isShield_old = ItemManager.isShield
 	ItemManager.isShield = isShield;
+
 	isWeapon_old = ItemManager.isWeapon
 	ItemManager.isWeapon = isWeapon;
 end
