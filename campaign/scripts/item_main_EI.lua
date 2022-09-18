@@ -8,12 +8,12 @@ local function getItemTypes()
 		['armor'] = false,
 		['wand'] = false,
 		['staff'] = false,
-		['wondrous item'] = false,
+		['wondrous%sitem'] = false,
 		['shield'] = false,
 	};
 
 	for s, _ in pairs(tTypes) do
-		tTypes[s] = (type.getValue() .. subtype.getValue()):lower():match(s);
+		tTypes[s] = (type.getValue() .. subtype.getValue()):lower():match(s) ~= nil;
 	end
 
 	return tTypes
@@ -68,16 +68,20 @@ function update(...)
 	if self.updateControl('size', bReadOnly, bID) then tSections[3] = true; end
 
 	local tTypes = getItemTypes();
+	tSections[4] = true;
 	if Session.IsHost or bID then
 		if tTypes['shield'] then
 			type_stats.setValue("item_main_armor", nodeRecord);
 			type_stats2.setValue("item_main_weapon", nodeRecord);
 		elseif tTypes['weapon'] then
 			type_stats.setValue("item_main_weapon", nodeRecord);
+			type_stats2.setValue("", "");
 		elseif tTypes['armor'] then
 			type_stats.setValue("item_main_armor", nodeRecord);
+			type_stats2.setValue("", "");
 		else
 			type_stats.setValue("", "");
+			type_stats2.setValue("", "");
 			tSections[4] = false;
 		end
 	else
@@ -105,7 +109,7 @@ function update(...)
 	if self.updateControl("cl", bReadOnly, bID) then tSections[5] = true; end
 	if self.updateControl("prerequisites", bReadOnly, bID) then tSections[5] = true; end
 	if self.updateControl("activation", bReadOnly, bID and (
-							tTypes['shield'] or tTypes['armor'] or tTypes['shield'] or tTypes['staff'] or tTypes['wondrous']
+							tTypes['shield'] or tTypes['armor'] or tTypes['staff'] or tTypes['wondrous']
 						)) then tSections[5] = true; end
 
 	tSections[6] = bID;
