@@ -13,7 +13,7 @@ local function getItemTypes()
 	};
 
 	for s, _ in pairs(tTypes) do
-		tTypes[s] = (type.getValue() .. subtype.getValue()):lower():match(s);
+		tTypes[s] = (type.getValue() .. subtype.getValue()):lower():match(s) ~= nil;
 	end
 
 	return tTypes
@@ -68,6 +68,7 @@ function update(...)
 	if self.updateControl('size', bReadOnly, bID) then tSections[3] = true; end
 
 	local tTypes = getItemTypes();
+	tSections[4] = true;
 	if Session.IsHost or bID then
 		if tTypes['shield'] then
 			type_stats.setValue("item_main_armor", nodeRecord);
