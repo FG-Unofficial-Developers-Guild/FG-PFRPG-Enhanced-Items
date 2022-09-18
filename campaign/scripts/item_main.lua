@@ -106,7 +106,7 @@ function update(...)
 	if self.updateControl("cl", bReadOnly, bID) then tSections[5] = true; end
 	if self.updateControl("prerequisites", bReadOnly, bID) then tSections[5] = true; end
 	if self.updateControl("activation", bReadOnly, bID and (
-							tTypes['shield'] or tTypes['armor'] or tTypes['shield'] or tTypes['staff'] or tTypes['wondrous']
+							tTypes['shield'] or tTypes['armor'] or tTypes['staff'] or tTypes['wondrous']
 						)) then tSections[5] = true; end
 
 	tSections[6] = bID;
