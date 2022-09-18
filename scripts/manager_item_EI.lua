@@ -14,7 +14,7 @@ local function contains(tList, sItem)
 		return false;
 	end
 	for i = 1, #tList do
-		if sItem:match(tList[i]) then -- replace exact string match with string.match
+		if sItem:lower():match(tList[i]:lower()) then -- replace exact string match with string.match
 			return true;
 		end
 	end
