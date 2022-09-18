@@ -8,7 +8,7 @@ local function getItemTypes()
 		['armor'] = false,
 		['wand'] = false,
 		['staff'] = false,
-		['wondrous item'] = false,
+		['wondrous%sitem'] = false,
 		['shield'] = false,
 	};
 
