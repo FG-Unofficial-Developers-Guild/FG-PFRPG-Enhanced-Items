@@ -33,57 +33,19 @@
 
 			<sub_column name="type_stats2" insertbefore="divider4" />
 			
-			<label_column name="charge_label" insertbefore="divider4">
-				<anchored>
-					<top offset="16" />
-				</anchored>
+			<label_column name="maxcharges_label" insertbefore="divider4">
 				<static textres="item_label_charges" />
 			</label_column>
-
-			<number_columnh name="charge" insertbefore="divider4">
-				<anchored width="45">
-					<top offset="16" />
-				</anchored>
-				<stateframe>
-					<drophilight name="fieldfocusplus" />
-				</stateframe>
-				<script>
-					function onDrop(x, y, draginfo)
-						if draginfo.isType("number") then
-							setValue(getValue() + draginfo.getNumberData());
-							return true;
-						end
-					end
-				</script>
-			</number_columnh>
-			<label_fieldtop name="current_label" insertafter="divider4">
-				<anchored to="charge" />
-				<static textres="item_label_curent" size="50%" />
-			</label_fieldtop>
-
-			<number_column name="maxcharges">
-				<anchored width="45">
-					<top parent="charge" anchor="top" offset="0" />
-					<left parent="charge" anchor="right" offset="10" />
-				</anchored>
+			<number_columnh name="maxcharges" insertbefore="divider4">
 				<default>50</default>
-				<gmeditonly />
-				<stateframe>
-					<drophilight name="fieldfocusplus" />
-				</stateframe>
-				<script>
-					function onDrop(x, y, draginfo)
-						if draginfo.isType("number") then
-							setValue(getValue() + draginfo.getNumberData());
-							return true;
-						end
-					end
-				</script>
-			</number_column>
-			<label_fieldtop name="maxcharges_label" insertafter="divider4">
-				<anchored to="maxcharges" />
-				<static textres="item_label_max_charges" size="50%" />
-			</label_fieldtop>
+				<tooltip textres="item_label_max_charges" />
+			</number_columnh>
+			<state_itemchargecounter name="charge">
+				<anchored to="maxcharges">
+					<left anchor="right" offset="10" />
+					<top />
+				</anchored>
+			</state_itemchargecounter>
 
 			<label_column name="activation_label" insertbefore="divider5">
 				<static textres="item_label_activation" />
@@ -107,4 +69,15 @@
 			<string_columnh name="sourcebook" />
 		</sheetdata>
 	</windowclass>
+
+	<template name="state_itemchargecounter">
+		<buttongroup_counter>
+			<sourcefields>
+				<maximum>maxcharges</maximum>
+				<current>charge</current>
+			</sourcefields>
+			<maxslotperrow>25</maxslotperrow>
+			<script file="campaign/scripts/state_itemchargecounter.lua" />
+		</buttongroup_counter>
+	</template>
 </root>

@@ -91,15 +91,13 @@ function update(...)
 	type_stats.update(bReadOnly, bID);
 	type_stats2.update(bReadOnly, bID);
 
-	if self.updateControl('charge', bReadOnly, bID and (tTypes['wand'] or tTypes['staff'])) then
+	if self.updateControl('maxcharges', bReadOnly, bID and (tTypes['wand'] or tTypes['staff'])) then
 		maxcharges.setReadOnly(bReadOnly);
 		charge.setReadOnly(false);
-		current_label.setVisible(true);
-		maxcharges.setVisible(true);
+		charge.setVisible(true);
 		maxcharges_label.setVisible(true);
 	else
-		current_label.setVisible(false);
-		maxcharges.setVisible(false);
+		charge.setVisible(false);
 		maxcharges_label.setVisible(false);
 	end
 
