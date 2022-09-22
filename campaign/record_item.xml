@@ -41,9 +41,10 @@
 				<tooltip textres="item_label_max_charges" />
 			</number_columnh>
 			<state_itemchargecounter name="charge">
-				<anchored to="maxcharges">
-					<left anchor="right" offset="10" />
-					<top />
+				<anchored>
+					<left parent="maxcharges" anchor="right" offset="10" />
+					<top parent="maxcharges" />
+					<right />
 				</anchored>
 			</state_itemchargecounter>
 
@@ -76,7 +77,6 @@
 				<maximum>maxcharges</maximum>
 				<current>charge</current>
 			</sourcefields>
-			<maxslotperrow>25</maxslotperrow>
 			<script file="campaign/scripts/state_itemchargecounter.lua" />
 		</buttongroup_counter>
 	</template>

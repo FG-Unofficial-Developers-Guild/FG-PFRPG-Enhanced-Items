@@ -3,6 +3,10 @@
 -- attribution and copyright information.
 --
 
+-- luacheck: globals maxslotperrow sourcefields setMaxNode setCurrNode updateSlots onMenuSelection setCurrentValue update
+-- luacheck: globals adjustCounter onClickDown onClickRelease getMaxValue getCurrentValue setMaxValue setAnchoredWidth
+-- luacheck: globals addBitmapWidget widget stateicons isReadOnly onWheel setAnchoredHeight checkBounds
+
 local bInit = false;
 
 slots = {};
@@ -17,15 +21,6 @@ local nLocalMax = 0;
 local nLocalCurrent = 0;
 
 function onInit()
-	-- Get any custom fields
-	if values then
-		if values[1].maximum then
-			nLocalMax = tonumber(values[1].maximum[1]) or 0;
-		end
-		if values[1].current then
-			nLocalCurrent = tonumber(values[1].current[1]) or 0;
-		end
-	end
 	if maxslotperrow then
 		nMaxSlotRow = tonumber(maxslotperrow[1]) or 10;
 	end
@@ -55,15 +50,6 @@ function onInit()
 			setCurrNode(DB.getPath(nodeWin, sLoadCurrNodeName));
 		end
 	end
-
-	if spacing then
-		nSpacing = tonumber(spacing[1]) or nDefaultSpacing;
-	end
-	if allowsinglespacing then
-		setAnchoredHeight(nSpacing);
-	else
-		setAnchoredHeight(nSpacing*2);
-	end
 	setAnchoredWidth(nSpacing);
 
 	bInit = true;
@@ -75,7 +61,7 @@ end
 
 function onClose()
 	bInit = false;
-	
+
 	setMaxNode("");
 	setCurrNode("");
 end
@@ -88,7 +74,7 @@ end
 
 function update()
 	updateSlots();
-	
+
 	if self.onValueChanged then
 		self.onValueChanged();
 	end
@@ -105,13 +91,13 @@ function onWheel(notches)
 	end
 end
 
-function onClickDown(button, x, y)
+function onClickDown()
 	if not isReadOnly() then
 		return true;
 	end
 end
 
-function onClickRelease(button, x, y)
+function onClickRelease(_, x, y)
 	if not isReadOnly() then
 		local m = getMaxValue();
 		local c = getCurrentValue();
@@ -139,12 +125,12 @@ function updateSlots()
 	if not bInit then
 		return;
 	end
-	
+
 	checkBounds();
 
 	local m = getMaxValue();
 	local c = getCurrentValue();
-	
+
 	if #slots ~= m then
 		-- Clear
 		for _,v in ipairs(slots) do
@@ -154,7 +140,7 @@ function updateSlots()
 
 		-- Build slots
 		for i = 1, m do
-			local widget = nil;
+			local widget;
 
 			if i > c then
 				widget = addBitmapWidget(stateicons[1].off[1]);
@@ -162,11 +148,15 @@ function updateSlots()
 				widget = addBitmapWidget(stateicons[1].on[1]);
 			end
 
+			nMaxSlotRow = m / math.floor((window.getSize() - 97 - 30) / m);
+			Debug.chat(nMaxSlotRm, math.floor((window.getSize() - 97 - 30) / m));
+			Debug.chat(nMaxSlotRow);
+
 			local nW = (i - 1) % nMaxSlotRow;
 			local nH = math.floor((i - 1) / nMaxSlotRow);
 			local nX = (nSpacing * nW) + math.floor(nSpacing / 2);
 			local nY;
-			if m > nMaxSlotRow or allowsinglespacing then
+			if m > nMaxSlotRow then
 				nY = (nSpacing * nH) + math.floor(nSpacing / 2);
 			else
 				nY = (nSpacing * nH) + nSpacing;
@@ -175,17 +165,13 @@ function updateSlots()
 
 			slots[i] = widget;
 		end
-		
+
 		if m > nMaxSlotRow then
 			setAnchoredWidth(nMaxSlotRow * nSpacing);
 			setAnchoredHeight((math.floor((m - 1) / nMaxSlotRow) + 1) * nSpacing);
 		else
 			setAnchoredWidth(m * nSpacing);
-			if allowsinglespacing then
-				setAnchoredHeight(nSpacing);
-			else
-				setAnchoredHeight(nSpacing * 2);
-			end
+			setAnchoredHeight(nSpacing * 2);
 		end
 	else
 		for i = 1, m do
@@ -201,7 +187,7 @@ end
 function adjustCounter(nAdj)
 	local m = getMaxValue();
 	local c = getCurrentValue() + nAdj;
-	
+
 	if c > m then
 		setCurrentValue(m);
 	elseif c < 0 then
@@ -214,7 +200,7 @@ end
 function checkBounds()
 	local m = getMaxValue();
 	local c = getCurrentValue();
-	
+
 	if c > m then
 		setCurrentValue(m);
 	elseif c < 0 then
@@ -247,8 +233,6 @@ end
 function setCurrentValue(nCount)
 	if sCurrNodeName ~= "" then
 		DB.setValue(sCurrNodeName, "number", getMaxValue() - nCount);
-	else
-		nLocalCurrent = nCurrent;
 	end
 end
 

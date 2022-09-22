@@ -22,15 +22,16 @@ end
 local function sectionVis(tSections)
 	for k, v in ipairs(tSections) do
 		local num, bool = k, nil;
-		if k > 2 then
+		if k == 2 then
+			if self['divider'] then self['divider'].setVisible(v and tSections[k - 1]); end
+		elseif k > 2 then
 			repeat
 				num = num - 1;
 				bool = tSections[num] or bool;
 			until num == 1;
 
-			if self['divider' .. tostring(k - 1)] then self['divider' .. tostring(k - 1)].setVisible(v and bool); end
-		elseif k == 2 then
-			if self['divider'] then self['divider'].setVisible(v and tSections[k - 1]); end
+			local sDivName = 'divider' .. tostring(k - 1)
+			if self[sDivName] then self[sDivName].setVisible(v and bool); end
 		end
 	end
 end
