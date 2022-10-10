@@ -7,253 +7,219 @@
 -- luacheck: globals adjustCounter onClickDown onClickRelease getMaxValue getCurrentValue setMaxValue setAnchoredWidth
 -- luacheck: globals addBitmapWidget widget stateicons isReadOnly onWheel setAnchoredHeight checkBounds
 
-local bInit = false;
+local bInit = false
 
-slots = {};
-local nMaxSlotRow = 10;
-local nDefaultSpacing = 10;
-local nSpacing = nDefaultSpacing;
+slots = {}
+local nMaxSlotRow = 10
+local nDefaultSpacing = 10
+local nSpacing = nDefaultSpacing
 
-local sMaxNodeName = "";
-local sCurrNodeName = "";
+local sMaxNodeName = ''
+local sCurrNodeName = ''
 
-local nLocalMax = 0;
-local nLocalCurrent = 0;
+local nLocalMax = 0
+local nLocalCurrent = 0
 
 function onInit()
-	if maxslotperrow then
-		nMaxSlotRow = tonumber(maxslotperrow[1]) or 10;
-	end
+	if maxslotperrow then nMaxSlotRow = tonumber(maxslotperrow[1]) or 10 end
 
 	-- Synch to the data nodes
-	local nodeWin = window.getDatabaseNode();
+	local nodeWin = window.getDatabaseNode()
 	if nodeWin then
-		local sLoadMaxNodeName = "";
-		local sLoadCurrNodeName = "";
+		local sLoadMaxNodeName = ''
+		local sLoadCurrNodeName = ''
 
 		if sourcefields then
-			if sourcefields[1].maximum then
-				sLoadMaxNodeName = sourcefields[1].maximum[1];
-			end
-			if sourcefields[1].current then
-				sLoadCurrNodeName = sourcefields[1].current[1];
-			end
+			if sourcefields[1].maximum then sLoadMaxNodeName = sourcefields[1].maximum[1] end
+			if sourcefields[1].current then sLoadCurrNodeName = sourcefields[1].current[1] end
 		end
 
-		if sLoadMaxNodeName ~= "" then
-			if not DB.getValue(nodeWin, sLoadMaxNodeName) then
-				DB.setValue(nodeWin, sLoadMaxNodeName, "number", 1);
-			end
-			setMaxNode(DB.getPath(nodeWin, sLoadMaxNodeName));
+		if sLoadMaxNodeName ~= '' then
+			if not DB.getValue(nodeWin, sLoadMaxNodeName) then DB.setValue(nodeWin, sLoadMaxNodeName, 'number', 1) end
+			setMaxNode(DB.getPath(nodeWin, sLoadMaxNodeName))
 		end
-		if sLoadCurrNodeName ~= "" then
-			setCurrNode(DB.getPath(nodeWin, sLoadCurrNodeName));
-		end
+		if sLoadCurrNodeName ~= '' then setCurrNode(DB.getPath(nodeWin, sLoadCurrNodeName)) end
 	end
-	setAnchoredWidth(nSpacing);
+	setAnchoredWidth(nSpacing)
 
-	bInit = true;
+	bInit = true
 
-	updateSlots();
+	updateSlots()
 
-	registerMenuItem(Interface.getString("counter_menu_clear"), "erase", 4);
+	registerMenuItem(Interface.getString('counter_menu_clear'), 'erase', 4)
 end
 
 function onClose()
-	bInit = false;
+	bInit = false
 
-	setMaxNode("");
-	setCurrNode("");
+	setMaxNode('')
+	setCurrNode('')
 end
 
 function onMenuSelection(selection)
-	if selection == 4 then
-		setCurrentValue(0);
-	end
+	if selection == 4 then setCurrentValue(0) end
 end
 
 function update()
-	updateSlots();
+	updateSlots()
 
-	if self.onValueChanged then
-		self.onValueChanged();
-	end
+	if self.onValueChanged then self.onValueChanged() end
 end
 
 function onWheel(notches)
 	if not isReadOnly() then
-		if not Input.isControlPressed() then
-			return false;
-		end
+		if not Input.isControlPressed() then return false end
 
-		adjustCounter(notches);
-		return true;
+		adjustCounter(notches)
+		return true
 	end
 end
 
 function onClickDown()
-	if not isReadOnly() then
-		return true;
-	end
+	if not isReadOnly() then return true end
 end
 
 function onClickRelease(_, x, y)
 	if not isReadOnly() then
-		local m = getMaxValue();
-		local c = getCurrentValue();
+		local m = getMaxValue()
+		local c = getCurrentValue()
 
-		local nClickH = math.floor(x / nSpacing) + 1;
-		local nClickV;
+		local nClickH = math.floor(x / nSpacing) + 1
+		local nClickV
 		if m > nMaxSlotRow then
-			nClickV	= math.floor(y / nSpacing);
+			nClickV = math.floor(y / nSpacing)
 		else
-			nClickV = 0;
+			nClickV = 0
 		end
-		local nClick = (nClickV * nMaxSlotRow) + nClickH;
+		local nClick = (nClickV * nMaxSlotRow) + nClickH
 
 		if nClick > c then
-			adjustCounter(1);
+			adjustCounter(1)
 		else
-			adjustCounter(-1);
+			adjustCounter(-1)
 		end
 
-		return true;
+		return true
 	end
 end
 
 function updateSlots()
-	if not bInit then
-		return;
-	end
+	if not bInit then return end
 
-	checkBounds();
+	checkBounds()
 
-	local m = getMaxValue();
-	local c = getCurrentValue();
+	local m = getMaxValue()
+	local c = getCurrentValue()
 
 	if #slots ~= m then
 		-- Clear
-		for _,v in ipairs(slots) do
-			v.destroy();
+		for _, v in ipairs(slots) do
+			v.destroy()
 		end
-		slots = {};
+		slots = {}
 
 		-- Build slots
 		for i = 1, m do
-			local widget;
+			local widget
 
 			if i > c then
-				widget = addBitmapWidget(stateicons[1].off[1]);
+				widget = addBitmapWidget(stateicons[1].off[1])
 			else
-				widget = addBitmapWidget(stateicons[1].on[1]);
+				widget = addBitmapWidget(stateicons[1].on[1])
 			end
 
-			nMaxSlotRow = m / math.floor((window.getSize() - 97 - 30) / m);
-			Debug.chat(nMaxSlotRm, math.floor((window.getSize() - 97 - 30) / m));
-			Debug.chat(nMaxSlotRow);
+			nMaxSlotRow = m / math.floor((window.getSize() - 97 - 30) / m)
+			Debug.chat(nMaxSlotRm, math.floor((window.getSize() - 97 - 30) / m))
+			Debug.chat(nMaxSlotRow)
 
-			local nW = (i - 1) % nMaxSlotRow;
-			local nH = math.floor((i - 1) / nMaxSlotRow);
-			local nX = (nSpacing * nW) + math.floor(nSpacing / 2);
-			local nY;
+			local nW = (i - 1) % nMaxSlotRow
+			local nH = math.floor((i - 1) / nMaxSlotRow)
+			local nX = (nSpacing * nW) + math.floor(nSpacing / 2)
+			local nY
 			if m > nMaxSlotRow then
-				nY = (nSpacing * nH) + math.floor(nSpacing / 2);
+				nY = (nSpacing * nH) + math.floor(nSpacing / 2)
 			else
-				nY = (nSpacing * nH) + nSpacing;
+				nY = (nSpacing * nH) + nSpacing
 			end
-			widget.setPosition("topleft", nX, nY);
+			widget.setPosition('topleft', nX, nY)
 
-			slots[i] = widget;
+			slots[i] = widget
 		end
 
 		if m > nMaxSlotRow then
-			setAnchoredWidth(nMaxSlotRow * nSpacing);
-			setAnchoredHeight((math.floor((m - 1) / nMaxSlotRow) + 1) * nSpacing);
+			setAnchoredWidth(nMaxSlotRow * nSpacing)
+			setAnchoredHeight((math.floor((m - 1) / nMaxSlotRow) + 1) * nSpacing)
 		else
-			setAnchoredWidth(m * nSpacing);
-			setAnchoredHeight(nSpacing * 2);
+			setAnchoredWidth(m * nSpacing)
+			setAnchoredHeight(nSpacing * 2)
 		end
 	else
 		for i = 1, m do
 			if i > c then
-				slots[i].setBitmap(stateicons[1].off[1]);
+				slots[i].setBitmap(stateicons[1].off[1])
 			else
-				slots[i].setBitmap(stateicons[1].on[1]);
+				slots[i].setBitmap(stateicons[1].on[1])
 			end
 		end
 	end
 end
 
 function adjustCounter(nAdj)
-	local m = getMaxValue();
-	local c = getCurrentValue() + nAdj;
+	local m = getMaxValue()
+	local c = getCurrentValue() + nAdj
 
 	if c > m then
-		setCurrentValue(m);
+		setCurrentValue(m)
 	elseif c < 0 then
-		setCurrentValue(0);
+		setCurrentValue(0)
 	else
-		setCurrentValue(c);
+		setCurrentValue(c)
 	end
 end
 
 function checkBounds()
-	local m = getMaxValue();
-	local c = getCurrentValue();
+	local m = getMaxValue()
+	local c = getCurrentValue()
 
 	if c > m then
-		setCurrentValue(m);
+		setCurrentValue(m)
 	elseif c < 0 then
-		setCurrentValue(0);
+		setCurrentValue(0)
 	end
 end
 
 function getMaxValue()
-	if sMaxNodeName ~= "" then
-		return DB.getValue(sMaxNodeName, 0);
-	end
-	return nLocalMax;
+	if sMaxNodeName ~= '' then return DB.getValue(sMaxNodeName, 0) end
+	return nLocalMax
 end
 
 function setMaxValue(nMax)
-	if sMaxNodeName ~= "" then
-		DB.setValue(sMaxNodeName, "number", nMax);
+	if sMaxNodeName ~= '' then
+		DB.setValue(sMaxNodeName, 'number', nMax)
 	else
-		nLocalMax = nMax;
+		nLocalMax = nMax
 	end
 end
 
 function getCurrentValue()
-	if sCurrNodeName ~= "" then
-		return getMaxValue() - DB.getValue(sCurrNodeName, 0);
-	end
-	return nLocalCurrent;
+	if sCurrNodeName ~= '' then return getMaxValue() - DB.getValue(sCurrNodeName, 0) end
+	return nLocalCurrent
 end
 
 function setCurrentValue(nCount)
-	if sCurrNodeName ~= "" then
-		DB.setValue(sCurrNodeName, "number", getMaxValue() - nCount);
-	end
+	if sCurrNodeName ~= '' then DB.setValue(sCurrNodeName, 'number', getMaxValue() - nCount) end
 end
 
 function setCurrNode(sNewCurrNodeName)
-	if sCurrNodeName ~= "" then
-		DB.removeHandler(sCurrNodeName, "onUpdate", update);
-	end
-	sCurrNodeName = sNewCurrNodeName;
-	if sCurrNodeName ~= "" then
-		DB.addHandler(sCurrNodeName, "onUpdate", update);
-	end
-	updateSlots();
+	if sCurrNodeName ~= '' then DB.removeHandler(sCurrNodeName, 'onUpdate', update) end
+	sCurrNodeName = sNewCurrNodeName
+	if sCurrNodeName ~= '' then DB.addHandler(sCurrNodeName, 'onUpdate', update) end
+	updateSlots()
 end
 
 function setMaxNode(sNewMaxNodeName)
-	if sMaxNodeName ~= "" then
-		DB.removeHandler(sMaxNodeName, "onUpdate", update);
-	end
-	sMaxNodeName = sNewMaxNodeName;
-	if sMaxNodeName ~= "" then
-		DB.addHandler(sMaxNodeName, "onUpdate", update);
-	end
-	updateSlots();
+	if sMaxNodeName ~= '' then DB.removeHandler(sMaxNodeName, 'onUpdate', update) end
+	sMaxNodeName = sNewMaxNodeName
+	if sMaxNodeName ~= '' then DB.addHandler(sMaxNodeName, 'onUpdate', update) end
+	updateSlots()
 end

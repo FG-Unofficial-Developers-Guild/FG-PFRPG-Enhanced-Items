@@ -8,56 +8,54 @@
 
 -- luacheck: globals ItemManager.isArmor ItemManager.isShield ItemManager.isWeapon
 
-local contains_old;
+local contains_old
 local function contains(tList, sItem)
-	if not tList or not sItem then
-		return false;
-	end
+	if not tList or not sItem then return false end
 	for i = 1, #tList do
 		if sItem:lower():match(tList[i]:lower()) then -- replace exact string match with string.match
-			return true;
+			return true
 		end
 	end
-	return false;
+	return false
 end
 
-local isArmor_old;
+local isArmor_old
 local function isArmor(nodeItem, ...)
-	contains_old = StringManager.contains;
-	StringManager.contains = contains;
-	local bReturn = isArmor_old(nodeItem, ...);
-	StringManager.contains = contains_old;
+	contains_old = StringManager.contains
+	StringManager.contains = contains
+	local bReturn = isArmor_old(nodeItem, ...)
+	StringManager.contains = contains_old
 
-	return bReturn;
+	return bReturn
 end
 
-local isShield_old;
+local isShield_old
 local function isShield(nodeItem, ...)
-	contains_old = StringManager.contains;
-	StringManager.contains = contains;
-	local bReturn = isShield_old(nodeItem, ...);
-	StringManager.contains = contains_old;
+	contains_old = StringManager.contains
+	StringManager.contains = contains
+	local bReturn = isShield_old(nodeItem, ...)
+	StringManager.contains = contains_old
 
-	return bReturn;
+	return bReturn
 end
 
-local isWeapon_old;
+local isWeapon_old
 local function isWeapon(nodeItem, ...)
-	contains_old = StringManager.contains;
-	StringManager.contains = contains;
-	local bReturn = isWeapon_old(nodeItem, ...);
-	StringManager.contains = contains_old;
+	contains_old = StringManager.contains
+	StringManager.contains = contains
+	local bReturn = isWeapon_old(nodeItem, ...)
+	StringManager.contains = contains_old
 
-	return bReturn;
+	return bReturn
 end
 
 function onInit()
 	isArmor_old = ItemManager.isArmor
-	ItemManager.isArmor = isArmor;
+	ItemManager.isArmor = isArmor
 
 	isShield_old = ItemManager.isShield
-	ItemManager.isShield = isShield;
+	ItemManager.isShield = isShield
 
 	isWeapon_old = ItemManager.isWeapon
-	ItemManager.isWeapon = isWeapon;
+	ItemManager.isWeapon = isWeapon
 end
