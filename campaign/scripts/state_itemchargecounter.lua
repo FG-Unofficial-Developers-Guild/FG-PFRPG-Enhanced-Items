@@ -129,8 +129,8 @@ function updateSlots()
 			end
 
 			nMaxSlotRow = m / math.floor((window.getSize() - 97 - 30) / m)
-			Debug.chat(nMaxSlotRm, math.floor((window.getSize() - 97 - 30) / m))
-			Debug.chat(nMaxSlotRow)
+			--Debug.chat(nMaxSlotRm, math.floor((window.getSize() - 97 - 30) / m))
+			--Debug.chat(nMaxSlotRow)
 
 			local nW = (i - 1) % nMaxSlotRow
 			local nH = math.floor((i - 1) / nMaxSlotRow)
