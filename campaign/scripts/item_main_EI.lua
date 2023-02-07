@@ -81,6 +81,12 @@ function update(...)
 		elseif tTypes['armor'] then
 			type_stats.setValue('item_main_armor', nodeRecord)
 			type_stats2.setValue('', '')
+		elseif tTypes['wand'] then
+			type_stats.setValue('item_main_wand', nodeRecord)
+			type_stats2.setValue('', '')
+		elseif tTypes['staff'] then
+			type_stats.setValue('item_main_weapon', nodeRecord)
+			type_stats2.setValue('item_main_wand', nodeRecord)
 		else
 			type_stats.setValue('', '')
 			type_stats2.setValue('', '')
@@ -93,18 +99,7 @@ function update(...)
 	type_stats.update(bReadOnly, bID)
 	type_stats2.update(bReadOnly, bID)
 
-	if self.updateControl('maxcharges', bReadOnly, bID and (tTypes['wand'] or tTypes['staff'])) then
-		maxcharges.setReadOnly(bReadOnly)
-		charge.setReadOnly(false)
-		charge.setVisible(true)
-		maxcharges_label.setVisible(true)
-	else
-		charge.setVisible(false)
-		maxcharges_label.setVisible(false)
-	end
-
 	if self.updateControl('equipslot', bReadOnly, bID and tTypes['wondrous%sitem']) then tSections[4] = true end
-
 	if self.updateControl('aura', bReadOnly, bID) then tSections[5] = true end
 	if self.updateControl('cl', bReadOnly, bID) then tSections[5] = true end
 	if self.updateControl('prerequisites', bReadOnly, bID) then tSections[5] = true end
