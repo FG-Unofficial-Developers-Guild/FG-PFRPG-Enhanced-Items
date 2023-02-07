@@ -94,6 +94,7 @@ function update(...)
 		end
 	else
 		type_stats.setValue('', '')
+		type_stats2.setValue('', '')
 		tSections[4] = false
 	end
 	type_stats.update(bReadOnly, bID)
