@@ -40,13 +40,10 @@
 				<default>50</default>
 				<tooltip textres="item_label_max_charges" />
 			</number_columnh>
-			<state_itemchargecounter name="charge">
-				<anchored>
-					<left parent="maxcharges" anchor="right" offset="10" />
-					<top parent="maxcharges" />
-					<right />
-				</anchored>
-			</state_itemchargecounter>
+			<basicnumber name="charge">
+				<anchored to="maxcharges" position="righthigh" offset="10,0" width="35" height="20" />
+				<tooltip textres="item_label_curent" />
+			</basicnumber>
 
 			<label_column name="activation_label" insertbefore="divider5">
 				<static textres="item_label_activation" />
@@ -70,14 +67,4 @@
 			<string_columnh name="sourcebook" />
 		</sheetdata>
 	</windowclass>
-
-	<template name="state_itemchargecounter">
-		<buttongroup_counter>
-			<sourcefields>
-				<maximum>maxcharges</maximum>
-				<current>charge</current>
-			</sourcefields>
-			<script file="campaign/scripts/state_itemchargecounter.lua" />
-		</buttongroup_counter>
-	</template>
 </root>
