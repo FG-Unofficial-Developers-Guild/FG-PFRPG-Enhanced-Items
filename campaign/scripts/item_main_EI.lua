@@ -48,26 +48,26 @@ function update(...)
 	local tSections = {}
 
 	if Session.IsHost then
-		if self.updateControl('nonid_name', bReadOnly, true) then tSections[1] = true end
+		if WindowManager.callSafeControlUpdate(self, 'nonid_name', bReadOnly) then tSections[1] = true end
 	else
-		self.updateControl('nonid_name', false)
+		WindowManager.callSafeControlUpdate(self, 'nonid_name', bReadOnly, true)
 	end
 	if Session.IsHost or not bID then
-		if self.updateControl('nonidentified', bReadOnly, true) then tSections[1] = true end
+		if WindowManager.callSafeControlUpdate(self, 'nonidentified', bReadOnly) then tSections[1] = true end
 	else
-		self.updateControl('nonidentified', false)
+		WindowManager.callSafeControlUpdate(self, 'nonidentified', bReadOnly, true)
 	end
 
-	if self.updateControl('type', bReadOnly, bID) then tSections[2] = true end
-	if self.updateControl('subtype', bReadOnly, bID) then tSections[2] = true end
+	if WindowManager.callSafeControlUpdate(self, 'type', bReadOnly, not bID) then tSections[2] = true end
+	if WindowManager.callSafeControlUpdate(self, 'subtype', bReadOnly, not bID) then tSections[2] = true end
 
 	if Session.IsHost then
-		if self.updateControl('cost', bReadOnly, bID) then tSections[3] = true end
+		if WindowManager.callSafeControlUpdate(self, 'cost', bReadOnly, not bID) then tSections[3] = true end
 	else
-		if self.updateControl('cost', bReadOnly, bID and (cost_visibility.getValue() == 0)) then tSections[3] = true end
+		if WindowManager.callSafeControlUpdate(self, 'cost', bReadOnly, not (bID and (cost_visibility.getValue() == 0))) then tSections[3] = true end
 	end
-	if self.updateControl('weight', bReadOnly, bID) then tSections[3] = true end
-	if self.updateControl('size', bReadOnly, bID) then tSections[3] = true end
+	if WindowManager.callSafeControlUpdate(self, 'weight', bReadOnly, not bID) then tSections[3] = true end
+	if WindowManager.callSafeControlUpdate(self, 'size', bReadOnly, not bID) then tSections[3] = true end
 
 	local tTypes = getItemTypes()
 	tSections[4] = true
@@ -100,19 +100,26 @@ function update(...)
 	type_stats.update(bReadOnly, bID)
 	type_stats2.update(bReadOnly, bID)
 
-	if self.updateControl('equipslot', bReadOnly, bID and tTypes['wondrous%sitem']) then tSections[4] = true end
-	if self.updateControl('aura', bReadOnly, bID) then tSections[5] = true end
-	if self.updateControl('cl', bReadOnly, bID) then tSections[5] = true end
-	if self.updateControl('prerequisites', bReadOnly, bID) then tSections[5] = true end
-	if self.updateControl('activation', bReadOnly, bID and (tTypes['shield'] or tTypes['armor'] or tTypes['staff'] or tTypes['wondrous%sitem'])) then
+	if WindowManager.callSafeControlUpdate(self, 'equipslot', bReadOnly, not (bID and tTypes['wondrous%sitem'])) then tSections[4] = true end
+	if WindowManager.callSafeControlUpdate(self, 'aura', bReadOnly, not bID) then tSections[5] = true end
+	if WindowManager.callSafeControlUpdate(self, 'cl', bReadOnly, not bID) then tSections[5] = true end
+	if WindowManager.callSafeControlUpdate(self, 'prerequisites', bReadOnly, not bID) then tSections[5] = true end
+	if
+		WindowManager.callSafeControlUpdate(
+			self,
+			'activation',
+			bReadOnly,
+			not (bID and (tTypes['shield'] or tTypes['armor'] or tTypes['staff'] or tTypes['wondrous%sitem']))
+		)
+	then
 		tSections[5] = true
 	end
 
 	tSections[6] = bID
 	description.setVisible(bID)
 	description.setReadOnly(bReadOnly)
-	self.updateControl('sourcebook', bReadOnly, bID)
-	if self.updateControl('gmonly', bReadOnly, bID) then
+	WindowManager.callSafeControlUpdate(self, 'sourcebook', bReadOnly, not bID)
+	if WindowManager.callSafeControlUpdate(self, 'gmonly', bReadOnly, not bID) then
 		gmonly.setVisible(Session.IsHost)
 		gmonly_label.setVisible(Session.IsHost)
 	end
