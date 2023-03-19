@@ -20,19 +20,24 @@ local function getItemTypes()
 	return tTypes
 end
 
+local function setSectionVis(nDivNum, bool)
+	local sDivName = 'divider' .. tostring(nDivNum)
+	local bVis = self[sDivName] and (self[sDivName].getVisible and not self[sDivName].getVisible())
+	if bVis then self[sDivName].setVisible(bool) end
+end
+
 local function sectionVis(tSections)
 	for k, v in ipairs(tSections) do
 		local num, bool = k, nil
 		if k == 2 then
-			if self['divider'] then self['divider'].setVisible(v and tSections[k - 1]) end
+			setSectionVis('', v and tSections[k - 1])
 		elseif k > 2 then
 			repeat
 				num = num - 1
 				bool = tSections[num] or bool
 			until num == 1
 
-			local sDivName = 'divider' .. tostring(k - 1)
-			if self[sDivName] then self[sDivName].setVisible(v and bool) end
+			setSectionVis(k - 1, v and bool)
 		end
 	end
 end
