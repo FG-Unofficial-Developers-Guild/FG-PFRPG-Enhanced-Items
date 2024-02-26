@@ -10,7 +10,9 @@
 
 local contains_old
 local function contains(tList, sItem)
-	if not tList or not sItem then return false end
+	if not tList or not sItem then
+		return false
+	end
 	for i = 1, #tList do
 		if sItem:lower():match(tList[i]:lower()) then -- replace exact string match with string.match
 			return true
