@@ -9,16 +9,16 @@
 	<windowclass name="item_main" merge="join">
 		<script file="campaign/scripts/item_main_EI.lua" />
 		<sheetdata>
-			<label_column name="equipslot_label" insertbefore="divider2">
+			<label_content_column name="equipslot_label" insertbefore="divider2">
 				<static textres="item_label_equipslot" />
-			</label_column>
-			<string_columnh name="equipslot" insertbefore="divider2" />
+			</label_content_column>
+			<string_content_columnh name="equipslot" insertbefore="divider2" />
 
-			<string_columnh name="cost">
+			<string_content_columnh name="cost">
 				<anchored>
 					<right offset="-30" />
 				</anchored>
-			</string_columnh>
+			</string_content_columnh>
 			<buttonfield name="cost_visibility" insertbefore="weight_label">
 				<anchored to="cost" position="right" offset="10,0" width="20" />
 				<state icon="visibilityon" />>
@@ -31,28 +31,28 @@
 				<gmvisibleonly />
 			</buttonfield>
 
-			<sub_column name="type_stats2" insertbefore="divider4" />
+			<sub_content_column name="type_stats2" insertbefore="divider4" />
 
-			<label_column name="activation_label" insertbefore="divider5">
+			<label_content_column name="activation_label" insertbefore="divider5">
 				<static textres="item_label_activation" />
-			</label_column>
-			<string_columnh name="activation" insertbefore="divider5" />
+			</label_content_column>
+			<string_content_columnh name="activation" insertbefore="divider5" />
 
-			<label_column name="gmonly_label">
+			<label_content_column name="gmonly_label">
 				<static textres="item_label_gmonly" />
-			</label_column>
-			<ft_columnh name="gmonly">
+			</label_content_column>
+			<ft_content_columnh name="gmonly">
 				<anchored>
 					<left offset="97" />
 					<right offset="-5" />
 				</anchored>
 				<gmeditonly />
-			</ft_columnh>
+			</ft_content_columnh>
 
-			<label_column name="sourcebook_label">
+			<label_content_column name="sourcebook_label">
 				<static textres="item_label_sourcebook" />
-			</label_column>
-			<string_columnh name="sourcebook" />
+			</label_content_column>
+			<string_content_columnh name="sourcebook" />
 		</sheetdata>
 	</windowclass>
 
