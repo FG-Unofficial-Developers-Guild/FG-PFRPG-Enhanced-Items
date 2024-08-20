@@ -1,94 +1,94 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <!-- 
-  Please see the LICENSE.md file included with this distribution for 
-  attribution and copyright information.
+Please see the LICENSE.md file included with this distribution for
+attribution and copyright information.
 -->
 
 <root>
 	<windowclass name="item_main" merge="join">
-		<script file="campaign/scripts/item_main_EI.lua" />
+		<script file="campaign/scripts/item_main_EI.lua"/>
 		<sheetdata>
-			<label_column name="equipslot_label" insertbefore="divider2">
-				<static textres="item_label_equipslot" />
-			</label_column>
-			<string_columnh name="equipslot" insertbefore="divider2" />
+			<label_content_column name="equipslot_label" insertbefore="divider2">
+				<static textres="item_label_equipslot"/>
+			</label_content_column>
+			<string_content_columnh name="equipslot" insertbefore="divider2"/>
 
-			<string_columnh name="cost">
+			<string_content_columnh name="cost">
 				<anchored>
-					<right offset="-30" />
+					<right offset="-30"/>
 				</anchored>
-			</string_columnh>
+			</string_content_columnh>
 			<buttonfield name="cost_visibility" insertbefore="weight_label">
-				<anchored to="cost" position="right" offset="10,0" width="20" />
-				<state icon="visibilityon" />>
-				<state icon="visibilityoff" />
+				<anchored to="cost" position="right" offset="10,0" width="20"/>
+				<state icon="visibilityon"/>
+				<state icon="visibilityoff"/>
 				<script>
 					function onValueChanged()
-						window.update();
+					window.update();
 					end
 				</script>
-				<gmvisibleonly />
+				<gmvisibleonly/>
 			</buttonfield>
 
-			<sub_column name="type_stats2" insertbefore="divider4" />
+			<sub_content_column name="type_stats2" insertbefore="divider4"/>
 
-			<label_column name="activation_label" insertbefore="divider5">
-				<static textres="item_label_activation" />
-			</label_column>
-			<string_columnh name="activation" insertbefore="divider5" />
+			<label_content_column name="activation_label" insertbefore="divider5">
+				<static textres="item_label_activation"/>
+			</label_content_column>
+			<string_content_columnh name="activation" insertbefore="divider5"/>
 
-			<label_column name="gmonly_label">
-				<static textres="item_label_gmonly" />
-			</label_column>
-			<ft_columnh name="gmonly">
+			<label_content_column name="gmonly_label">
+				<static textres="item_label_gmonly"/>
+			</label_content_column>
+			<ft_content_columnh name="gmonly">
 				<anchored>
-					<left offset="97" />
-					<right offset="-5" />
+					<left offset="97"/>
+					<right offset="-5"/>
 				</anchored>
-				<gmeditonly />
-			</ft_columnh>
+				<gmeditonly/>
+			</ft_content_columnh>
 
-			<label_column name="sourcebook_label">
-				<static textres="item_label_sourcebook" />
-			</label_column>
-			<string_columnh name="sourcebook" />
+			<label_content_column name="sourcebook_label">
+				<static textres="item_label_sourcebook"/>
+			</label_content_column>
+			<string_content_columnh name="sourcebook"/>
 		</sheetdata>
 	</windowclass>
 
 	<windowclass name="item_main_wand">
-		<margins control="0,0,0,2" />
+		<margins control="0,0,0,2"/>
 		<script>
 			function update(bReadOnly)
-				maxcharges.update(bReadOnly);
-				charge.setReadOnly(bReadOnly);
+			maxcharges.update(bReadOnly);
+			charge.setReadOnly(bReadOnly);
 			end
 		</script>
 		<sheetdata>
-			<anchor_column name="columnanchor" />
-			
-			<label_column name="maxcharges_label">
+			<anchor_content_top/>
+
+			<label_content_column name="maxcharges_label">
 				<anchored>
-					<top offset="17" />
+					<top offset="17"/>
 				</anchored>
-				<static textres="item_label_charges" />
-			</label_column>
-			<number_columnh name="maxcharges">
+				<static textres="item_label_charges"/>
+			</label_content_column>
+			<number_content_columnh name="maxcharges">
 				<anchored>
-					<top offset="17" />
+					<top offset="17"/>
 				</anchored>
 				<default>50</default>
-			</number_columnh>
+			</number_content_columnh>
 			<label_fieldtop name="maxcharges_label">
-				<anchored to="maxcharges" />
-				<static textres="item_label_max_charges" size="50%" />
+				<anchored to="maxcharges"/>
+				<static textres="item_label_max_charges" size="50%"/>
 			</label_fieldtop>
 			<basicnumber name="charge">
-				<anchored to="maxcharges" position="righthigh" offset="10,0" width="35" height="20" />
+				<anchored to="maxcharges" position="righthigh" offset="10,0" width="35" height="20"/>
 			</basicnumber>
 			<label_fieldtop name="current_label">
-				<anchored to="charge" />
-				<static textres="item_label_curent" size="50%" />
+				<anchored to="charge"/>
+				<static textres="item_label_curent" size="50%"/>
 			</label_fieldtop>
 		</sheetdata>
 	</windowclass>
