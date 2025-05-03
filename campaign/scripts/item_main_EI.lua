@@ -44,7 +44,7 @@ local function sectionVis(tSections)
 	end
 end
 
--- luacheck: globals update
+-- luacheck: globals onStateChanged
 function onStateChanged(...)
 	if super and super.onStateChanged then
 		super.onStateChanged(...)
