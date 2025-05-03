@@ -84,12 +84,7 @@ function onStateChanged(...)
 		end
 	else
 		if
-			WindowManager.callSafeControlUpdate(
-				self,
-				'cost',
-				bReadOnly,
-				not (bID and (cost_visibility.getValue() == 0))
-			)
+			WindowManager.callSafeControlUpdate(self, 'cost', bReadOnly, not (bID and (cost_visibility.getValue() == 0)))
 		then
 			tSections[3] = true
 		end
