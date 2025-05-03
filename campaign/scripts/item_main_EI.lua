@@ -45,9 +45,9 @@ local function sectionVis(tSections)
 end
 
 -- luacheck: globals update
-function update(...)
-	if super and super.update then
-		super.update(...)
+function onStateChanged(...)
+	if super and super.onStateChanged then
+		super.onStateChanged(...)
 	end
 
 	local nodeRecord = getDatabaseNode()

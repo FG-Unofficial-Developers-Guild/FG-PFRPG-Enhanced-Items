@@ -27,7 +27,7 @@
 		<includefile source="strings/strings.xml" />
 
 		<!-- Scripts -->
-		<script name="ItemManagerEI" file="scripts/manager_item_EI.lua" />
+		<!-- <script name="ItemManagerEI" file="scripts/manager_item_EI.lua" /> -->
 
 		<!-- Campaign Records -->
 		<includefile source="campaign/record_item.xml" />
