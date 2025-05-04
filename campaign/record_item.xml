@@ -25,7 +25,7 @@ attribution and copyright information.
 				<state icon="visibilityoff"/>
 				<script>
 					function onValueChanged()
-					window.update();
+						window.onStateChanged();
 					end
 				</script>
 				<gmvisibleonly/>
@@ -59,9 +59,12 @@ attribution and copyright information.
 	<windowclass name="item_main_wand">
 		<margins control="0,0,0,2"/>
 		<script>
-			function update(bReadOnly)
-			maxcharges.update(bReadOnly);
-			charge.setReadOnly(bReadOnly);
+			function onInit()
+				self.onLockModeChanged(WindowManager.getWindowReadOnlyState(self));
+			end
+			function onLockModeChanged(bReadOnly)
+				local tFields = { "maxcharges", "charge"};
+				WindowManager.callSafeControlsSetLockMode(self, tFields, bReadOnly);
 			end
 		</script>
 		<sheetdata>
