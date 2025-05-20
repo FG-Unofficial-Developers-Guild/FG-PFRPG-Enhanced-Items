@@ -1,4 +1,5 @@
-[![Build FG-Usable File](https://github.com/FG-Unofficial-Developers-Guild/FG-PFRPG-Enhanced-Items/actions/workflows/release.yml/badge.svg)](https://github.com/FG-Unofficial-Developers-Guild/FG-PFRPG-Enhanced-Items/actions/workflows/release.yml) [![Luacheck](https://github.com/FG-Unofficial-Developers-Guild/FG-PFRPG-Enhanced-Items/actions/workflows/luacheck.yml/badge.svg)](https://github.com/FG-Unofficial-Developers-Guild/FG-PFRPG-Enhanced-Items/actions/workflows/luacheck.yml)
+[![Build FG-Usable File](https://github.com/FG-Unofficial-Developers-Guild/FG-PFRPG-Enhanced-Items/actions/workflows/release.yml/badge.svg)](https://github.com/FG-Unofficial-Developers-Guild/FG-PFRPG-Enhanced-Items/actions/workflows/release.yml)
+[![Check Lua Code](https://github.com/FG-Unofficial-Developers-Guild/FG-PFRPG-Enhanced-Items/actions/workflows/lua.yml/badge.svg)](https://github.com/FG-Unofficial-Developers-Guild/FG-PFRPG-Enhanced-Items/actions/workflows/lua.yml)
 
 # Enhanced Items
 This extension modifies the item sheet to add some additional features like charges for wands and a gm-only notes field.
